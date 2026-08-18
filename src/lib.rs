@@ -1,14 +1,7 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+#![feature(portable_simd)]
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+/// Summary statistics over a slice of `f32` values.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct Summary {}
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+pub mod scalar;
