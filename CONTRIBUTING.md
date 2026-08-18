@@ -18,7 +18,21 @@ shared roadmap so scope doesn't drift mid-session.
 Before touching a test file, say explicitly: **"We're only working on item
 N right now."** This single habit prevents most bulk-test drift.
 
-## 2. Division of labor
+## 2. One behavior per test
+
+A test asserts **one** behavior. If a test has several assertions covering
+different observable properties, it's several tests wearing a trenchcoat —
+split it and drive them from separate red/green cycles.
+
+Concretely: `single element sums to itself` and `single element's min is
+itself` are two items on the test list, two red steps, two commits. Don't
+bundle them just because one implementation happens to satisfy both.
+
+The same rule applies to data structures: don't add fields to a struct
+because you know you'll need them later. Each field appears because a
+failing test demanded it.
+
+## 3. Division of labor
 
 - **Claude** — thinking partner. Use for the test list, writing _one_ test
   at a time, discussing the minimal implementation, and proposing refactors
@@ -29,7 +43,26 @@ N right now."** This single habit prevents most bulk-test drift.
 Only one tool proposes code per step. Don't let both design in the same
 step — you'll get conflicting implementations.
 
-## 3. Prompts to reuse each cycle
+### Alternating cycles
+
+Cycles alternate between the human and the AI. The AI does one full
+red/green/refactor cycle, then **the human does the next one** — writing the
+test and the implementation themselves.
+
+On the human's cycles the AI switches to reviewer:
+
+- read the test that was just written and say whether it's really one
+  behavior, and whether it fails for the right reason;
+- read the implementation and say whether it's the minimal step or whether
+  it jumped ahead;
+- propose a refactor if the code asks for one — and say plainly when it
+  doesn't.
+
+The AI does not write code during the human's cycle. It runs the suite,
+reports the real output, and reviews. This keeps the human's hands in the
+loop and stops the session from turning into supervised code generation.
+
+## 4. Prompts to reuse each cycle
 
 **Red:**
 
@@ -55,22 +88,37 @@ If the AI hands you multiple tests or jumps ahead to implementation, stop
 and flag it like a code review comment — don't accept it just because it
 happened to work.
 
-## 4. Atomic commits, one per loop stage
+## 5. Atomic commits, never on red
 
-| Stage    | Commit message example         | When                                          |
-| -------- | ------------------------------ | --------------------------------------------- |
-| Red      | `test: add failing test for X` | test written, confirmed failing               |
-| Green    | `feat: make X pass`            | minimal implementation, confirmed passing     |
-| Refactor | `refactor: simplify Y`         | only if a refactor happened, only after green |
+**Never commit a failing test.** Every commit on the branch must have a
+green suite — the red state lives in your working tree, not in history. A
+committed red test breaks bisect, breaks CI, and breaks anyone who checks
+out that commit.
 
-This keeps behavioral changes (red/green) separate from structural changes
-(refactor) in the git history — Beck's "tidy first" principle — and makes
-the log itself a readable TDD trail, useful for bisecting later.
+So the test and the minimal implementation that makes it pass land in the
+_same_ commit, once you've seen it go red and then green:
 
-## 5. Guardrails
+| Stage    | Commit?                | Message example        | When                                          |
+| -------- | ---------------------- | ---------------------- | --------------------------------------------- |
+| Red      | no — working tree only | —                      | test written, confirmed failing for the right reason |
+| Green    | yes                    | `feat: sum a single element` | test + minimal implementation, confirmed passing |
+| Refactor | yes, separately        | `refactor: simplify Y` | only if a refactor happened, only after green  |
+
+Refactors stay in their own commit so structural changes are separate from
+behavioral ones — Beck's "tidy first" principle — and the log stays a
+readable TDD trail, useful for bisecting later.
+
+## 6. Guardrails
 
 - Always see the actual failing output before implementing.
 - Always see the actual passing output before committing.
+- Never commit while the suite is red — red is a working-tree state.
 - Never trust a claimed test result — verify in the terminal yourself.
 - If scope creeps (extra tests, extra handling, unrequested refactors),
   stop the cycle and re-anchor on the single next item from the plan.
+- No production code without a failing test that demands it — including
+  scaffolding, module skeletons, and struct fields.
+- One behavior per test; multiple assertions on different properties is a
+  smell, not a shortcut.
+- Alternate cycles between human and AI; on the human's cycle the AI reviews
+  and suggests refactors instead of writing code.
