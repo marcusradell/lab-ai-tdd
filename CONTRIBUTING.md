@@ -1,4 +1,4 @@
-# TDD Pairing Workflow — Copilot CLI + Claude
+# TDD Pairing Workflow — Copilot CLI + an LLM
 
 A reference for practicing Kent Beck–style TDD while pairing with AI tools.
 Keep this open next to the repo during a session.
@@ -34,11 +34,11 @@ failing test demanded it.
 
 ## 3. Division of labor
 
-- **Claude** — thinking partner. Use for the test list, writing _one_ test
+- **LLM** — thinking partner. Use for the test list, writing _one_ test
   at a time, discussing the minimal implementation, and proposing refactors
   once green.
 - **Copilot CLI** — the hands. Runs the test suite, handles git operations,
-  scaffolding, diffs. Executes what you and Claude just agreed on.
+  scaffolding, diffs. Executes what you and the LLM just agreed on.
 
 Only one tool proposes code per step. Don't let both design in the same
 step — you'll get conflicting implementations.
