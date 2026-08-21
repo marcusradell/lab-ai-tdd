@@ -54,6 +54,11 @@ Cycles alternate between the human and the AI. The AI does one full
 red/green/refactor cycle, then **the human does the next one** — writing the
 test and the implementation themselves.
 
+A characterization test also consumes its author's turn. Because the
+existing implementation may already make it green, temporarily mutate the
+implementation so the new test fails for the expected reason, restore the
+implementation, and verify green before committing.
+
 On the human's cycles the AI switches to reviewer:
 
 - read the test that was just written and say whether it's really one
@@ -122,6 +127,8 @@ readable TDD trail, useful for bisecting later.
 ## 6. Guardrails
 
 - Always see the actual failing output before implementing.
+- For a characterization test, provoke the expected failure with a temporary
+  implementation mutation, then restore the implementation and verify green.
 - Always see the actual passing output before committing.
 - Never commit while the suite is red — red is a working-tree state.
 - Never trust a claimed test result — verify in the terminal yourself.
