@@ -29,3 +29,8 @@ fn two_elements_min_gives_smallest() {
 fn single_element_max_is_itself() {
     assert_eq!(scalar::summarize(&[3.0]).unwrap().max, 3.0);
 }
+
+#[test]
+fn two_elements_max_gives_largest() {
+    assert_eq!(scalar::summarize(&[899.99, 900.0]).unwrap().max, 900.0);
+}
