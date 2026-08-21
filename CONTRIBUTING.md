@@ -18,6 +18,10 @@ shared roadmap so scope doesn't drift mid-session.
 Before touching a test file, say explicitly: **"We're only working on item
 N right now."** This single habit prevents most bulk-test drift.
 
+Planning and editing `TEST_LIST.md` do not start a TDD cycle or authorize
+changes to tests or production code. Begin implementation only when the
+human explicitly starts the next cycle and assigns its owner.
+
 ## 2. One scenario per test
 
 A test exercises **one scenario** and compares the whole unit under test when
@@ -125,6 +129,8 @@ readable TDD trail, useful for bisecting later.
   stop the cycle and re-anchor on the single next item from the plan.
 - No production code without a failing test that demands it — including
   scaffolding, module skeletons, and struct fields.
+- A requirements discussion or test-list update is planning only. Do not
+  write a test or implementation until the human explicitly starts a cycle.
 - One scenario per test; prefer one whole-value equality assertion over
   multiple field assertions.
 - Alternate cycles between human and AI; on the human's cycle the AI reviews
@@ -140,11 +146,13 @@ future tools; this document is the single readable source of truth for how
 the session runs. If a convention is worth remembering, it's worth a line
 here.
 
-## 8. Floating-point contract
+## 8. Planned floating-point contract
 
 `Summary` uses normal `f32` equality, so positive and negative zero compare
 equal. Do not replace this with bitwise equality.
 
-`summarize` returns `Result<Summary, SummarizeError>`. Empty input is an
-error. If input contains NaN values, the error must report all of their
-zero-based indices rather than returning a partially meaningful summary.
+The unchecked items in `TEST_LIST.md` plan a future
+`Result<Summary, SummarizeError>` API. Empty input will be an error. If input
+contains NaN values, the error will report all of their zero-based indices.
+These requirements remain test-list items until their individual TDD cycles
+are explicitly started.

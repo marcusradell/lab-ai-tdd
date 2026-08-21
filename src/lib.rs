@@ -6,9 +6,4 @@ pub struct Summary {
     pub max: f32,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub enum SummarizeError {
-    EmptyInput,
-}
-
 pub mod scalar;

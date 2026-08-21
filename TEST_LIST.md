@@ -4,9 +4,12 @@ The list follows ZOMBIES ordering: zero, one, many, and boundary behaviors.
 Work on one unchecked item at a time. Check an item only after its test and
 minimal implementation are green and committed.
 
+Adding or changing an item plans future work only. It does not authorize
+changes to tests or production code.
+
 ## Zero
 
-- [x] Given an empty slice, when summarized, then `EmptyInput` is returned.
+- [x] Given an empty slice, when summarized, then no summary is returned.
 
 ## One
 
@@ -19,5 +22,6 @@ minimal implementation are green and committed.
 ## Floating-point boundaries
 
 - [ ] Given signed zeros, when summaries are compared, then their signs do not affect equality.
+- [ ] Given an empty slice, when summarized, then `EmptyInput` is returned.
 - [ ] Given one NaN, when summarized, then its zero-based index is returned in an error.
 - [ ] Given multiple NaNs, when summarized, then all zero-based indices are returned in an error.
