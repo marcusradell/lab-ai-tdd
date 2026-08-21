@@ -18,7 +18,7 @@ minimal implementation are green and committed.
 
 - [x] Given two values, when summarized, then their sum is the total.
 - [x] Given two values, when summarized, then the minimum is the smaller value.
-- [ ] Given two values, when summarized, then the maximum is the larger value.
+- [x] Given two values, when summarized, then the maximum is the larger value.
 - [ ] Given many values, when summarized, then their sum is the total.
 - [ ] Given many values, when summarized, then the minimum is the smallest.
 - [ ] Given many values, when summarized, then the maximum is the largest.
