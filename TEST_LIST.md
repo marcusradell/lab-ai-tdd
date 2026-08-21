@@ -14,6 +14,4 @@ minimal implementation are green and committed.
 
 ## Many
 
-- [x] Given two values, when summarized, then their sum is the total.
-- [x] Given two values, when summarized, then the minimum is the smaller value.
-- [x] Given two values, when summarized, then the maximum is the larger value.
+- [x] Given two values, when summarized, then all statistics are correct.
