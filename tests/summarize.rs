@@ -28,3 +28,19 @@ fn two_elements_have_expected_summary() {
         })
     );
 }
+
+#[test]
+fn signed_zero_summaries_are_equal() {
+    assert_eq!(
+        Summary {
+            sum: -0.0,
+            min: -0.0,
+            max: -0.0,
+        },
+        Summary {
+            sum: 0.0,
+            min: 0.0,
+            max: 0.0,
+        }
+    );
+}

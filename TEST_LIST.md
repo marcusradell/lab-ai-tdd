@@ -21,7 +21,7 @@ changes to tests or production code.
 
 ## Floating-point boundaries
 
-- [ ] Given signed zeros, when summaries are compared, then their signs do not affect equality.
+- [x] Given signed zeros, when summaries are compared, then their signs do not affect equality.
 - [ ] Given an empty slice, when summarized, then `EmptyInput` is returned.
 - [ ] Given one NaN, when summarized, then its zero-based index is returned in an error.
 - [ ] Given multiple NaNs, when summarized, then all zero-based indices are returned in an error.
