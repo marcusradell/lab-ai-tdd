@@ -11,7 +11,7 @@ resisting the model's default toward bulk output.
 
 ## 1. Plan before writing any test
 
-Have a short planning exchange (with Claude) to produce an ordered list of
+Have a short planning exchange to produce an ordered list of
 small behaviors for the feature — not code, just the list. This is the
 shared roadmap so scope doesn't drift mid-session.
 
@@ -104,11 +104,11 @@ out that commit.
 So the test and the minimal implementation that makes it pass land in the
 _same_ commit, once you've seen it go red and then green:
 
-| Stage    | Commit?                | Message example        | When                                          |
-| -------- | ---------------------- | ---------------------- | --------------------------------------------- |
-| Red      | no — working tree only | —                      | test written, confirmed failing for the right reason |
-| Green    | yes                    | `feat: sum a single element` | test + minimal implementation, confirmed passing |
-| Refactor | yes, separately        | `refactor: simplify Y` | only if a refactor happened, only after green  |
+| Stage    | Commit?                | Message example              | When                                                 |
+| -------- | ---------------------- | ---------------------------- | ---------------------------------------------------- |
+| Red      | no — working tree only | —                            | test written, confirmed failing for the right reason |
+| Green    | yes                    | `feat: sum a single element` | test + minimal implementation, confirmed passing     |
+| Refactor | yes, separately        | `refactor: simplify Y`       | only if a refactor happened, only after green        |
 
 Refactors stay in their own commit so structural changes are separate from
 behavioral ones — Beck's "tidy first" principle — and the log stays a
