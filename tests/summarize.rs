@@ -1,4 +1,4 @@
-use stats::scalar;
+use stats::{Summary, scalar};
 
 #[test]
 fn empty_slice_has_no_summary() {
@@ -6,8 +6,15 @@ fn empty_slice_has_no_summary() {
 }
 
 #[test]
-fn single_element_sums_to_itself() {
-    assert_eq!(scalar::summarize(&[3.0]).unwrap().sum, 3.0);
+fn single_element_has_expected_summary() {
+    assert_eq!(
+        scalar::summarize(&[3.0]),
+        Some(Summary {
+            sum: 3.0,
+            min: 3.0,
+            max: 3.0,
+        })
+    );
 }
 
 #[test]
@@ -16,18 +23,8 @@ fn two_elements_sum_to_the_total() {
 }
 
 #[test]
-fn single_elements_min_is_itself() {
-    assert_eq!(scalar::summarize(&[3.0]).unwrap().min, 3.0);
-}
-
-#[test]
 fn two_elements_min_gives_smallest() {
     assert_eq!(scalar::summarize(&[3.0, 0.0]).unwrap().min, 0.0);
-}
-
-#[test]
-fn single_element_max_is_itself() {
-    assert_eq!(scalar::summarize(&[3.0]).unwrap().max, 3.0);
 }
 
 #[test]

@@ -10,9 +10,7 @@ minimal implementation are green and committed.
 
 ## One
 
-- [x] Given one value, when summarized, then its sum is itself.
-- [x] Given one value, when summarized, then its minimum is itself.
-- [x] Given one value, when summarized, then its maximum is itself.
+- [x] Given one value, when summarized, then all statistics equal that value.
 
 ## Many
 

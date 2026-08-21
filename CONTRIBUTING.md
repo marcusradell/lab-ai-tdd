@@ -18,15 +18,16 @@ shared roadmap so scope doesn't drift mid-session.
 Before touching a test file, say explicitly: **"We're only working on item
 N right now."** This single habit prevents most bulk-test drift.
 
-## 2. One behavior per test
+## 2. One scenario per test
 
-A test asserts **one** behavior. If a test has several assertions covering
-different observable properties, it's several tests wearing a trenchcoat —
-split it and drive them from separate red/green cycles.
+A test exercises **one scenario** and compares the whole unit under test when
+the result is a value object. Derive `PartialEq` and `Debug` for result types
+where appropriate, then prefer one equality assertion over separate
+field-by-field assertions.
 
-Concretely: `single element sums to itself` and `single element's min is
-itself` are two items on the test list, two red steps, two commits. Don't
-bundle them just because one implementation happens to satisfy both.
+Concretely, one single-element summary test compares the complete `Summary`
+value, including its sum, minimum, and maximum. This keeps the observable
+result together and avoids several tests that differ only by the field read.
 
 The same rule applies to data structures: don't add fields to a struct
 because you know you'll need them later. Each field appears because a
@@ -124,8 +125,8 @@ readable TDD trail, useful for bisecting later.
   stop the cycle and re-anchor on the single next item from the plan.
 - No production code without a failing test that demands it — including
   scaffolding, module skeletons, and struct fields.
-- One behavior per test; multiple assertions on different properties is a
-  smell, not a shortcut.
+- One scenario per test; prefer one whole-value equality assertion over
+  multiple field assertions.
 - Alternate cycles between human and AI; on the human's cycle the AI reviews
   and suggests refactors instead of writing code.
 - On the human's cycle the human runs the suite; the AI doesn't re-run it to
