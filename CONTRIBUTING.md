@@ -139,3 +139,12 @@ into this file. Memory is invisible to everyone else on the repo and to
 future tools; this document is the single readable source of truth for how
 the session runs. If a convention is worth remembering, it's worth a line
 here.
+
+## 8. Floating-point contract
+
+`Summary` uses normal `f32` equality, so positive and negative zero compare
+equal. Do not replace this with bitwise equality.
+
+`summarize` returns `Result<Summary, SummarizeError>`. Empty input is an
+error. If input contains NaN values, the error must report all of their
+zero-based indices rather than returning a partially meaningful summary.

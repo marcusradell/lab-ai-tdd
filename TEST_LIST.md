@@ -6,7 +6,7 @@ minimal implementation are green and committed.
 
 ## Zero
 
-- [x] Given an empty slice, when summarized, then no summary is returned.
+- [x] Given an empty slice, when summarized, then `EmptyInput` is returned.
 
 ## One
 
@@ -15,3 +15,9 @@ minimal implementation are green and committed.
 ## Many
 
 - [x] Given two values, when summarized, then all statistics are correct.
+
+## Floating-point boundaries
+
+- [ ] Given signed zeros, when summaries are compared, then their signs do not affect equality.
+- [ ] Given one NaN, when summarized, then its zero-based index is returned in an error.
+- [ ] Given multiple NaNs, when summarized, then all zero-based indices are returned in an error.
