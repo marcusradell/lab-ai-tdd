@@ -58,9 +58,15 @@ On the human's cycles the AI switches to reviewer:
 - propose a refactor if the code asks for one — and say plainly when it
   doesn't.
 
-The AI does not write code during the human's cycle. It runs the suite,
-reports the real output, and reviews. This keeps the human's hands in the
-loop and stops the session from turning into supervised code generation.
+The AI does not write code during the human's cycle. It reviews: reads the
+test, reads the implementation, and proposes a refactor when the code asks
+for one. This keeps the human's hands in the loop and stops the session from
+turning into supervised code generation.
+
+The human runs the suite on their own cycles. The AI does not re-run
+`cargo test` to confirm red or green for a human step, and does not ask for
+confirmation of output the human is already watching — it waits until the
+human hands over the code for review.
 
 ## 4. Prompts to reuse each cycle
 
@@ -122,3 +128,13 @@ readable TDD trail, useful for bisecting later.
   smell, not a shortcut.
 - Alternate cycles between human and AI; on the human's cycle the AI reviews
   and suggests refactors instead of writing code.
+- On the human's cycle the human runs the suite; the AI doesn't re-run it to
+  confirm red or green.
+
+## 7. Session memory lives here
+
+Any workflow preference the AI stores in its own memory must also be written
+into this file. Memory is invisible to everyone else on the repo and to
+future tools; this document is the single readable source of truth for how
+the session runs. If a convention is worth remembering, it's worth a line
+here.
