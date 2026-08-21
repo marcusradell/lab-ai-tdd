@@ -13,12 +13,19 @@ minimal implementation are green and committed.
 - [x] Given one value, when summarized, then its sum is itself.
 - [x] Given one value, when summarized, then its minimum is itself.
 - [x] Given one value, when summarized, then its maximum is itself.
-- [x] Given one value, when summarized, then its mean is itself.
 
 ## Many
 
 - [x] Given two values, when summarized, then their sum is the total.
 - [x] Given two values, when summarized, then the minimum is the smaller value.
 - [x] Given two values, when summarized, then the maximum is the larger value.
-- [ ] Given two values, when summarized, then their mean is the average.
-- [ ] Given many values, when summarized, then their mean is the average.
+- [ ] Given many values, when summarized, then their sum is the total.
+- [ ] Given many values, when summarized, then the minimum is the smallest.
+- [ ] Given many values, when summarized, then the maximum is the largest.
+
+## Boundaries
+
+- [ ] Given negative values, when summed, then the signed total is returned.
+- [ ] Given negative values, when minimized, then the most negative is returned.
+- [ ] Given negative values, when maximized, then the least negative is returned.
+- [ ] Given repeated extrema, when summarized, then the repeated value remains the extremum.
