@@ -1,14 +1,14 @@
-use crate::Summary;
+use crate::{SummarizeError, Summary};
 
-pub fn summarize(xs: &[f32]) -> Option<Summary> {
+pub fn summarize(xs: &[f32]) -> Result<Summary, SummarizeError> {
     if xs.is_empty() {
-        return None;
+        return Err(SummarizeError::EmptyInput);
     }
 
     let min = xs.iter().copied().fold(f32::INFINITY, f32::min);
     let max = xs.iter().copied().fold(f32::NEG_INFINITY, f32::max);
 
-    Some(Summary {
+    Ok(Summary {
         sum: xs.iter().sum(),
         min,
         max,
