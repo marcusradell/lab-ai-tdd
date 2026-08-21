@@ -4,6 +4,7 @@
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Summary {
     pub sum: f32,
+    pub min: f32,
 }
 
 pub mod scalar;

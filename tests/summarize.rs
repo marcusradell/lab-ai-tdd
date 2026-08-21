@@ -14,3 +14,8 @@ fn single_element_sums_to_itself() {
 fn two_elements_sum_to_the_total() {
     assert_eq!(scalar::summarize(&[10.0, 3.0]).unwrap().sum, 13.0);
 }
+
+#[test]
+fn single_elements_min_is_itself() {
+    assert_eq!(scalar::summarize(&[3.0]).unwrap().min, 3.0);
+}
