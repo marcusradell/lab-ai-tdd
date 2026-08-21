@@ -12,5 +12,6 @@ pub fn summarize(xs: &[f32]) -> Option<Summary> {
         sum: xs.iter().sum(),
         min,
         max,
+        mean: xs[0],
     })
 }

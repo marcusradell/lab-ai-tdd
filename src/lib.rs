@@ -4,6 +4,7 @@ pub struct Summary {
     pub sum: f32,
     pub min: f32,
     pub max: f32,
+    pub mean: f32,
 }
 
 pub mod scalar;
